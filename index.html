@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sadish Ghimire | ML Engineer & Backend Developer</title>
+  <title>Sadish Ghimire | Computer Engineer & Full Stack .NET Developer</title>
   <meta name="description"
-    content="Portfolio of Sadish Ghimire — Machine Learning Engineer and Backend Developer building intelligent systems that solve real-world problems." />
+    content="Portfolio of Sadish Ghimire - Machine Learning Engineer and Backend Developer building intelligent systems that solve real-world problems." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -14,6 +14,15 @@
     rel="stylesheet" />
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- Three.js for 3D Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+  <!-- Vanilla-Tilt.js for 3D card tilt -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <!-- GSAP & ScrollTrigger for Cinematic Experiences -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lottie Player -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   <style>
     /* ===== RESET & BASE ===== */
@@ -26,19 +35,19 @@
     }
 
     :root {
-      --accent: #6366f1;
-      --accent-light: #818cf8;
-      --accent-glow: rgba(99, 102, 241, 0.25);
-      --bg: #020617;
-      --bg-card: rgba(15, 23, 42, 0.7);
-      --bg-nav: rgba(2, 6, 23, 0.85);
+      --accent: #00f2ff; /* Bio-Cyan */
+      --accent-light: #a855f7; /* Mystic Magenta */
+      --accent-glow: rgba(0, 242, 255, 0.35);
+      --bg: #020617; /* Deep Space Blue */
+      --bg-card: rgba(15, 23, 42, 0.55);
+      --bg-nav: rgba(2, 6, 23, 0.9);
       --text: #e2e8f0;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      --border: rgba(99, 102, 241, 0.18);
-      --radius: 16px;
-      --radius-sm: 8px;
-      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border: rgba(0, 242, 255, 0.15);
+      --radius: 24px;
+      --radius-sm: 12px;
+      --transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
     }
 
     html {
@@ -503,6 +512,7 @@
       transition: all var(--transition);
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
 
     .skill-card::before {
@@ -583,6 +593,7 @@
       color: inherit;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
     }
 
     .project-card::after {
@@ -1002,21 +1013,54 @@
       }
     }
 
-    /* ===== INTERSECTION OBSERVER ANIMATION ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+    /* ===== CINEMATIC EFFECTS ===== */
+    .god-rays {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 80% -20%, rgba(0, 242, 255, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .god-rays::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent 0%, transparent 5%, rgba(0, 242, 255, 0.03) 7%, transparent 10%);
+      mask-image: radial-gradient(circle at 80% -20%, black, transparent 70%);
+      -webkit-mask-image: radial-gradient(circle at 80% -20%, black, transparent 70%);
     }
+
+    /* ===== PARALLAX GHOST TEXT ===== */
+    .ghost-text {
+      position: absolute;
+      font-size: clamp(8rem, 20vw, 22rem);
+      font-weight: 900;
+      color: rgba(0, 242, 255, 0.012); /* Matching Cyan */
+      z-index: -1;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      text-transform: uppercase;
+      line-height: 0.8;
+      filter: blur(2px);
+    }
+
+    #ghost-ml { top: 15%; left: -5%; }
+    #ghost-data { top: 45%; right: -10%; }
+    #ghost-sql { bottom: 10%; left: 10%; }
   </style>
 </head>
 
 <body>
+
+  <!-- Ghost Background Text -->
+  <div class="ghost-text" id="ghost-ml">ML</div>
+  <div class="ghost-text" id="ghost-data">DATA</div>
+  <div class="ghost-text" id="ghost-sql">SQL</div>
+
+  <!-- Cinematic God Rays Overlay -->
+  <div class="god-rays"></div>
 
   <!-- Particle Canvas -->
   <canvas id="particles"></canvas>
@@ -1062,15 +1106,15 @@
         Hi, I'm <span class="name-accent">Sadish Ghimire</span>
       </h1>
 
-      <p class="hero-sub">ML Engineer &amp; Backend Developer</p>
+      <p class="hero-sub">ML Engineer &amp; Full stack .NET Developer</p>
 
       <p class="hero-desc">
-        I build intelligent systems that learn from data and solve real-world problems —
+        I build intelligent systems that learn from data and solve real-world problems -
         from deep learning models to scalable backend APIs.
       </p>
 
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#projects" class="btn-primary" style="background-color: rgb(17, 34, 77);">View Projects</a>
         <a href="https://www.linkedin.com/in/sadish-ghimire-7a792b211/" target="_blank" class="btn-outline">LinkedIn
           ↗</a>
       </div>
@@ -1085,10 +1129,15 @@
           <div class="stat-label">Projects Built</div>
         </div>
         <div class="stat">
-          <div class="stat-num">ML</div>
+          <div class="stat-num">ML & .NET focused</div>
           <div class="stat-label">Focused</div>
         </div>
       </div>
+    </div>
+    
+    <!-- Lottie Programming Animation (Floating) -->
+    <div class="hero-lottie" style="position: absolute; right: 10%; top: 50%; transform: translateY(-50%); width: 450px; max-width: 45vw; z-index: 5; pointer-events: none; opacity: 0.85;">
+      <lottie-player src="https://lottie.host/77b574f0-9dc3-4a9b-9ef0-59733c976fc9/sM7os2UHYj.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
     </div>
   </section>
 
@@ -1144,7 +1193,7 @@
     <div class="divider reveal"></div>
 
     <div class="skills-grid">
-      <div class="skill-card reveal">
+      <div class="skill-card reveal" data-tilt data-tilt-max="20" data-tilt-speed="2000" data-tilt-scale="1.08" data-tilt-glare data-tilt-max-glare="0.3">
         <div class="skill-icon">🧠</div>
         <div class="skill-title">Machine Learning</div>
         <div class="skill-desc">Designing, training, and evaluating models across supervised, unsupervised, and
@@ -1156,7 +1205,7 @@
         </div>
       </div>
 
-      <div class="skill-card reveal">
+      <div class="skill-card reveal" data-tilt data-tilt-max="15" data-tilt-speed="1000" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="skill-icon">🔬</div>
         <div class="skill-title">Deep Learning</div>
         <div class="skill-desc">Building neural architectures for vision, NLP, and sequential data using cutting-edge
@@ -1169,7 +1218,7 @@
         </div>
       </div>
 
-      <div class="skill-card reveal">
+      <div class="skill-card reveal" data-tilt data-tilt-max="15" data-tilt-speed="1000" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="skill-icon">🗄️</div>
         <div class="skill-title">Data Engineering</div>
         <div class="skill-desc">Building reliable data pipelines, writing performant queries, and managing databases for
@@ -1183,7 +1232,7 @@
         </div>
       </div>
 
-      <div class="skill-card reveal">
+      <div class="skill-card reveal" data-tilt data-tilt-max="15" data-tilt-speed="1000" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="skill-icon">⚡</div>
         <div class="skill-title">Backend &amp; Full-Stack .NET</div>
         <div class="skill-desc">Building scalable REST APIs, Blazor web apps, and data-access layers with Dapper and
@@ -1207,7 +1256,7 @@
 
     <div class="projects-grid">
       <a href="https://github.com/sadishghimire/medical-misinformation-detection-with-explanation." target="_blank"
-        class="project-card reveal">
+        class="project-card reveal" data-tilt data-tilt-max="18" data-tilt-speed="2000" data-tilt-scale="1.05" data-tilt-glare data-tilt-max-glare="0.25">
         <div class="project-header">
           <div class="project-icon">🏥</div>
           <span class="project-link-icon">↗</span>
@@ -1225,7 +1274,7 @@
         </div>
       </a>
 
-      <div class="project-card reveal">
+      <div class="project-card reveal" data-tilt data-tilt-max="12" data-tilt-speed="1000" data-tilt-glare data-tilt-max-glare="0.15">
         <div class="project-header">
           <div class="project-icon">🪪</div>
           <span class="project-link-icon">🔒</span>
@@ -1242,7 +1291,7 @@
         </div>
       </div>
 
-      <div class="project-card reveal">
+      <div class="project-card reveal" data-tilt data-tilt-max="12" data-tilt-speed="1000" data-tilt-glare data-tilt-max-glare="0.15">
         <div class="project-header">
           <div class="project-icon">📈</div>
           <span class="project-link-icon">🔒</span>
@@ -1372,21 +1421,39 @@
       scrollBar.style.width = pct + '%';
     });
 
-    // ── Intersection Observer (reveal animations) ──
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, idx) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), idx * 60);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    // ── GSAP ScrollTriggers (Replacing IntersectionObserver) ──
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    revealElements.forEach(el => observer.observe(el));
+      // Initial Reveal Animations (Staggered)
+      const sections = gsap.utils.toArray('section');
+      sections.forEach(section => {
+        const revealElements = section.querySelectorAll('.section-label, .section-title, .divider, .skill-card, .project-card, .about-text, .about-img-wrap, .contact-info, .contact-form');
+        
+        if (revealElements.length > 0) {
+          gsap.from(revealElements, {
+            scrollTrigger: {
+              trigger: section,
+              start: "top 88%", // Trigger slightly before it comes into view
+              toggleActions: "play none none none"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: "power3.out",
+            clearProps: "all" // Ensure elements aren't stuck with inline styles after animation
+          });
+        }
+      });
+
+      // Parallax Ghost Text
+      if (document.getElementById('ghost-ml')) gsap.to("#ghost-ml", { scrollTrigger: { scrub: 1 }, x: 150, y: -50 });
+      if (document.getElementById('ghost-data')) gsap.to("#ghost-data", { scrollTrigger: { scrub: 1 }, x: -150, y: 80 });
+      if (document.getElementById('ghost-sql')) gsap.to("#ghost-sql", { scrollTrigger: { scrub: 1 }, x: 100, y: -120 });
+
+      ScrollTrigger.refresh();
+    });
 
     // ── EmailJS Setup ──
     // ⚠️  Replace the three placeholder values below with your real EmailJS credentials.
@@ -1447,83 +1514,147 @@
         });
     }
 
-    // ── Particle Canvas ──
+    // ── Three.js 3D Bioluminescent Background ──
     const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x020617, 0.0012); // Atmospheric Fog
 
-    const PARTICLE_COUNT = 120;
-    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      r: Math.random() * 1.8 + 0.5
-    }));
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 400;
 
-    // Mouse repulsion
-    const mouse = { x: -9999, y: -9999 };
-    window.addEventListener('mousemove', e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+    const nodes = [];
+    const nodeCount = 130;
+    const nodeRadius = 2.2;
+    const connectionMaxDist = 150;
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    // Bioluminescent Materials
+    const nodeMat = new THREE.MeshBasicMaterial({ 
+      color: 0x00f2ff, 
+      transparent: true, 
+      opacity: 0.9,
+      blending: THREE.AdditiveBlending 
+    });
+    const magentaMat = new THREE.MeshBasicMaterial({ 
+      color: 0xa855f7, 
+      transparent: true, 
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending 
+    });
+    const lineMat = new THREE.LineBasicMaterial({ 
+      color: 0x00f2ff, 
+      transparent: true, 
+      opacity: 0.18, 
+      blending: THREE.AdditiveBlending 
     });
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const nodeGeom = new THREE.SphereGeometry(nodeRadius, 12, 12);
 
-      // Connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 160) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(99,102,241,${0.18 * (1 - dist / 160)})`;
-            ctx.lineWidth = 0.8;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+    // Create Nodes (Some Cyan, some Magenta)
+    for (let i = 0; i < nodeCount; i++) {
+      const isMagenta = Math.random() > 0.7;
+      const mesh = new THREE.Mesh(nodeGeom, isMagenta ? magentaMat : nodeMat);
+      mesh.position.set(
+        (Math.random() - 0.5) * 850,
+        (Math.random() - 0.5) * 850,
+        (Math.random() - 0.5) * 850
+      );
+      mesh.userData = {
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        vz: (Math.random() - 0.5) * 0.6,
+        pulseSpeed: 0.02 + Math.random() * 0.05,
+        pulseOffset: Math.random() * Math.PI * 2
+      };
+      nodes.push(mesh);
+      group.add(mesh);
+    }
+
+    // Lines Container
+    let linesMesh;
+
+    function updateLines() {
+      if (linesMesh) group.remove(linesMesh);
+
+      const positions = [];
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dist = nodes[i].position.distanceTo(nodes[j].position);
+          if (dist < connectionMaxDist) {
+            positions.push(nodes[i].position.x, nodes[i].position.y, nodes[i].position.z);
+            positions.push(nodes[j].position.x, nodes[j].position.y, nodes[j].position.z);
           }
         }
       }
 
-      // Draw + update
-      particles.forEach(p => {
-        // Mouse repel
-        const mdx = p.x - mouse.x;
-        const mdy = p.y - mouse.y;
-        const md = Math.hypot(mdx, mdy);
-        if (md < 100) {
-          p.vx += (mdx / md) * 0.05;
-          p.vy += (mdy / md) * 0.05;
-        }
-
-        // Speed cap
-        const speed = Math.hypot(p.vx, p.vy);
-        if (speed > 1.2) { p.vx = (p.vx / speed) * 1.2; p.vy = (p.vy / speed) * 1.2; }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(99,102,241,0.75)';
-        ctx.fill();
-
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      });
-
-      requestAnimationFrame(drawParticles);
+      const lineGeom = new THREE.BufferGeometry();
+      lineGeom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      linesMesh = new THREE.LineSegments(lineGeom, lineMat);
+      group.add(linesMesh);
     }
 
-    drawParticles();
+    // Interaction
+    const mouse = new THREE.Vector2(-9999, -9999);
+    const targetGroupRotation = new THREE.Vector2(0, 0);
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      targetGroupRotation.y = mouse.x * 0.15;
+      targetGroupRotation.x = -mouse.y * 0.15;
+    });
+
+    function animate() {
+      const time = Date.now() * 0.001;
+      requestAnimationFrame(animate);
+
+      nodes.forEach(node => {
+        node.position.x += node.userData.vx;
+        node.position.y += node.userData.vy;
+        node.position.z += node.userData.vz;
+
+        // Bioluminescent Pulse
+        const pulse = 0.5 + 0.5 * Math.sin(time * 2 + node.userData.pulseOffset);
+        node.scale.setScalar(pulse * 0.4 + 0.8);
+        node.material.opacity = pulse * 0.3 + 0.6;
+
+        // Bounce
+        if (Math.abs(node.position.x) > 425) node.userData.vx *= -1;
+        if (Math.abs(node.position.y) > 425) node.userData.vy *= -1;
+        if (Math.abs(node.position.z) > 425) node.userData.vz *= -1;
+      });
+
+      // Cinematic Zoom on Scroll (Organic Bezier-like)
+      const scrollPos = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      const zoomLevel = 480 - Math.pow(scrollPos, 0.8) * 320; 
+      const rotationSpeed = 0.0012 + (scrollPos * 0.005); 
+
+      camera.position.z += (zoomLevel - camera.position.z) * 0.04;
+      camera.position.x = Math.sin(scrollPos * Math.PI) * 100; // Sway effect
+
+      group.rotation.x += (targetGroupRotation.x - group.rotation.x) * 0.06;
+      group.rotation.y += (targetGroupRotation.y - group.rotation.y) * 0.06;
+      group.rotation.y += rotationSpeed; 
+      group.rotation.z += 0.0005; // Extra organic rotation
+
+      updateLines();
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    animate();
   </script>
 
 </body>
